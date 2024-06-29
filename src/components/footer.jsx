@@ -54,15 +54,14 @@ export default function Footer() {
                     {/* Google Maps Embed */}
                     <div className="google-map-code w-full relative">
                         <iframe
+                            title='location'
                             src="https://www.google.com/maps/embed?pb=!1m22!1m8!1m3!1d3630.9619548650576!2d54.369782075358984!3d24.48677502817516!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d24.486741!2d54.372389399999996!4m5!1s0x3e5e6643bc903be1%3A0x1783c4b3b22b4a93!2sJotun%20Multicolor%20-%20Asia%20Exhibition%20Multiple%20Colors%20-%206%20Fatima%20Bint%20Mubarak%20St%20-%20Zone%201%20-%20Abu%20Dhabi%20-%20United%20Arab%20Emirates!3m2!1d24.486760699999998!2d54.3723629!5e0!3m2!1sen!2sae!4v1719281118569!5m2!1sen!2sae"
                             // width="600"
                             className='w-full'
                             height="150"
-                            frameborder="0"
                             style={{ border: 0 }}
-                            allowfullscreen=""
+                            allowFullScreen=""
                             aria-hidden="false"
-                            tabindex="0"
                         />
                     </div>
             </div>
