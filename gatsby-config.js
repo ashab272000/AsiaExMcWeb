@@ -9,6 +9,8 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-omni-font-loader`,
       options: {
@@ -28,6 +30,14 @@ module.exports = {
         name: `images`,
         // Path to the directory
         path: `${__dirname}/src/images/`,
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        // Path to the directory
+        path: `${__dirname}/src/content/`,
       }
     },
   ],

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticImage, getImageData } from 'gatsby-plugin-image'
+import { StaticImage, getImage } from 'gatsby-plugin-image'
 import Header from '../components/header'
 import { graphql } from 'gatsby'
 import ProductInfo from '../components/productInfo'
@@ -7,7 +7,13 @@ import Footer from '../components/footer'
 
 
 
-export default function Home() {
+export default function Home({data}) {
+
+    const latestProducts = data.latestProducts.nodes;
+    const images = data.images.nodes;
+    const sort = data.sort.edges[0].node.sort.split(',')
+    // console.log(data.sort.edges[0].node.sort)
+    // const sort = "lux,life,tosuede,eterna,kanva,nuovo".split(',')
 
     return (
         <div>
@@ -78,10 +84,36 @@ export default function Home() {
                     <h1 className='text-4xl m-4'>Latest Products</h1>
                     <div className='flex mb-4 w-full flex-wrap justify-center'>
                         {/* Product */}
-                        <ProductInfo />
-                        <ProductInfo />
-                        <ProductInfo />
-                        <ProductInfo />
+
+                        {
+                            
+                        sort.map((slug) => {
+                            let productImg = null;
+                            let product = null;
+                            // Get product according to the sort
+                            for(let j = 0; j<latestProducts.length; j++){
+
+                                    if(latestProducts[j].frontmatter.slug == slug){
+                                        // Found the product, now find
+                                        product = latestProducts[j];
+                                        for (let i = 0; i < images.length; i++) {
+                                            // Find the related image
+                                            if(images[i].relativePath == product.frontmatter.image){
+
+                                                productImg = getImage(images[i])
+                                                break
+                                            }
+                                        }
+                                    }
+
+
+                            }
+
+                            return (
+                                <ProductInfo  key={product.id} title={product.frontmatter.title} html={product.html} slug={product.frontmatter.slug} button_text={product.frontmatter.button_text} image={productImg}/>
+                             )
+                            })
+                        }
                     </div>
                 </div>
             </div>
@@ -90,4 +122,40 @@ export default function Home() {
         </div>
     )
 }
+
+export const query = graphql`
+query MyQuery {
+  latestProducts: allMarkdownRemark(filter: {frontmatter: {slug: {ne: "sort"}}}) {
+    nodes {
+      id
+      html
+      frontmatter {
+        title
+        image
+        link
+        button_text
+        type
+        slug
+      }
+    }
+  }
+  sort: allLatestProductsJson {
+    edges {
+      node {
+        sort
+      }
+    }
+  }
+  images: allFile(filter: {sourceInstanceName: {eq: "images"}}) {
+    nodes {
+      childImageSharp {
+        gatsbyImageData(width: 400)
+      }
+      relativePath
+      name
+    }
+  }
+
+}
+` 
 
