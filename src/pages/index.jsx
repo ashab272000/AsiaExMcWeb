@@ -36,7 +36,7 @@ export default function Home({data}) {
                     >
                         <h1 className='text-4xl text-white mt-8 mb-2 text-center'>Get your catalogue today</h1>
                         <h1 className='text-2xl text-white mb-4 text-center'>by visiting our store</h1>
-                        <div className='rounded bg-yellow-400 px-4 py-2 text-white w-32 text-center'>Visit us</div>
+                        <div className='rounded bg-secondary px-4 py-2 text-white w-32 text-center'>Visit us</div>
 
                     </div>
                 </div>
